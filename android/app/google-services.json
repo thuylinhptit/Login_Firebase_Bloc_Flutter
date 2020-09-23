@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "706179445180",
+    "firebase_url": "https://loginbloc-bff1c.firebaseio.com",
+    "project_id": "loginbloc-bff1c",
+    "storage_bucket": "loginbloc-bff1c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706179445180:android:1d566db97b4d4cafab3bb9",
+        "android_client_info": {
+          "package_name": "com.example.bloc_login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "706179445180-jincdbbb9bdb9a3nkvlq0q7hgrqf8jt5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv2FDXyOSLpvx6g_oI0Zp7JH-PG49kUxQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706179445180-jincdbbb9bdb9a3nkvlq0q7hgrqf8jt5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
