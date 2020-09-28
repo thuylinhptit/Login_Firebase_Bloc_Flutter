@@ -17,6 +17,7 @@ class CreateAccountButton extends StatelessWidget {
         'Create an Account',
       ),
       onPressed: () {
+        print("press Create an account");
         Navigator.of(context).push(
           MaterialPageRoute(builder: (context) {
             return RegisterScreen(userRepository: _userRepository);

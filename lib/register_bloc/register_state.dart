@@ -1,6 +1,5 @@
 import 'package:meta/meta.dart';
 
-@immutable
 class RegisterState {
   final bool isEmailValid;
   final bool isPasswordValid;
@@ -88,14 +87,4 @@ class RegisterState {
     );
   }
 
-  @override
-  String toString() {
-    return '''RegisterState {
-      isEmailValid: $isEmailValid,
-      isPasswordValid: $isPasswordValid,
-      isSubmitting: $isSubmitting,
-      isSuccess: $isSuccess,
-      isFailure: $isFailure,
-    }''';
-  }
 }

@@ -1,4 +1,4 @@
-import 'package:bloc_login/login_bloc.dart';
+import 'file:///F:/Flutter/bloc_login/lib/login_bloc/login_bloc.dart';
 import 'package:bloc_login/login_form.dart';
 import 'package:bloc_login/user_repository.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
+      backgroundColor: Colors.white,
+      appBar: AppBar(title: Text('PROPTIT')),
       body: BlocProvider<LoginBloc>(
         create: (context) => LoginBloc(userRepository: _userRepository),
         child: LoginForm(userRepository: _userRepository),

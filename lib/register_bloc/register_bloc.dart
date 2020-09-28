@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:bloc_login/register_event.dart';
-import 'package:bloc_login/register_state.dart';
+import 'file:///F:/Flutter/bloc_login/lib/register_bloc/register_event.dart';
+import 'file:///F:/Flutter/bloc_login/lib/register_bloc/register_state.dart';
 import 'package:bloc_login/user_repository.dart';
 import 'package:bloc_login/validator.dart';
 import 'package:meta/meta.dart';
@@ -12,10 +12,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   RegisterBloc({@required UserRepository userRepository})
       : assert(userRepository != null),
-        _userRepository = userRepository, super(null);
-
-  @override
-  RegisterState get initialState => RegisterState.empty();
+        _userRepository = userRepository, super(RegisterState.empty());
 
   @override
   Stream<RegisterState> mapEventToState(

@@ -1,26 +1,36 @@
-import 'package:bloc_login/authentication_bloc.dart';
-import 'package:bloc_login/authentication_event.dart';
-import 'package:bloc_login/authentication_state.dart';
+import 'file:///F:/Flutter/bloc_login/lib/authentication/authentication_bloc.dart';
+import 'file:///F:/Flutter/bloc_login/lib/authentication/authentication_event.dart';
+import 'file:///F:/Flutter/bloc_login/lib/authentication/authentication_state.dart';
 import 'package:bloc_login/home_screen.dart';
 import 'package:bloc_login/login_screen.dart';
 import 'package:bloc_login/simple_bloc_observer.dart';
 import 'package:bloc_login/screen.dart';
+import 'package:bloc_login/todo_bloc.dart';
+import 'package:bloc_login/todo_firebase_repository.dart';
+import 'package:bloc_login/todo_repository.dart';
 import 'package:bloc_login/user_repository.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main (){
+Future<void> main () async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   Bloc.observer = SimpleBlocObserver();
   final UserRepository userRepository = UserRepository();
+  final TodoRepository todoRepository = FirebaseRepository();
   runApp(
-    BlocProvider(
-      create: (context) => AuthenticationBloc(userRepository:  userRepository)
-      ..add(AppStarted()),
-      child: App(userRepository: userRepository),
+    MultiBlocProvider(providers: [
+      BlocProvider(
+        create: (context) => AuthenticationBloc(userRepository:  userRepository)
+          ..add(AppStarted()),
+      ),
+      BlocProvider(
+        create: (context) => TodoBloc(todosRepository: todoRepository),
+      )
+    ], child:  App(userRepository: userRepository),),
 
-    )
   );
 }
 
@@ -33,6 +43,7 @@ class App extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: BlocBuilder<AuthenticationBloc, AuthenticationState >(
         builder: (context, state ){
           if( state is Uninitialized ){

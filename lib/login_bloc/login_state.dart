@@ -87,14 +87,4 @@ class LoginState {
     );
   }
 
-  @override
-  String toString() {
-    return '''LoginState {
-      isEmailValid: $isEmailValid,
-      isPasswordValid: $isPasswordValid,
-      isSubmitting: $isSubmitting,
-      isSuccess: $isSuccess,
-      isFailure: $isFailure,
-    }''';
-  }
 }

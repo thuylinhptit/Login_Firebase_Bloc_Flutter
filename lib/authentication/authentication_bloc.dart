@@ -1,5 +1,5 @@
-import 'package:bloc_login/authentication_event.dart';
-import 'package:bloc_login/authentication_state.dart';
+import 'file:///F:/Flutter/bloc_login/lib/authentication/authentication_event.dart';
+import 'file:///F:/Flutter/bloc_login/lib/authentication/authentication_state.dart';
 import 'package:bloc_login/user_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

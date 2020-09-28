@@ -1,9 +1,9 @@
-import 'package:bloc_login/authentication_bloc.dart';
-import 'package:bloc_login/authentication_event.dart';
-import 'package:bloc_login/register_bloc.dart';
-import 'package:bloc_login/register_button.dart';
-import 'package:bloc_login/register_event.dart';
-import 'package:bloc_login/register_state.dart';
+import 'file:///F:/Flutter/bloc_login/lib/authentication/authentication_bloc.dart';
+import 'file:///F:/Flutter/bloc_login/lib/authentication/authentication_event.dart';
+import 'file:///F:/Flutter/bloc_login/lib/register_bloc/register_bloc.dart';
+import 'file:///F:/Flutter/bloc_login/lib/register_active/register_button.dart';
+import 'file:///F:/Flutter/bloc_login/lib/register_bloc/register_event.dart';
+import 'file:///F:/Flutter/bloc_login/lib/register_bloc/register_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,10 +20,10 @@ class _RegisterFormState extends State<RegisterForm> {
   bool get isPopulated =>
       _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
 
-  bool isRegisterButtonEnabled(RegisterState state) {
+
+  bool isRegisterButton(RegisterState state) {
     return state.isFormValid && isPopulated && !state.isSubmitting;
   }
-
   @override
   void initState() {
     super.initState();
@@ -44,7 +44,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Registering...'),
+                    Text('Loading...'),
                     CircularProgressIndicator(),
                   ],
                 ),
@@ -88,7 +88,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     autocorrect: false,
                     autovalidate: true,
                     validator: (_) {
-                      return !state.isEmailValid ? 'Invalid Email' : null;
+                      return !state.isEmailValid ? 'Invalid Email' : '';
                     },
                   ),
                   TextFormField(
@@ -101,11 +101,11 @@ class _RegisterFormState extends State<RegisterForm> {
                     autocorrect: false,
                     autovalidate: true,
                     validator: (_) {
-                      return !state.isPasswordValid ? 'Invalid Password' : null;
+                      return !state.isPasswordValid ? 'Invalid Password' : '';
                     },
                   ),
                   RegisterButton(
-                    onPressed: isRegisterButtonEnabled(state)
+                    onPressed: isRegisterButton(state)
                         ? _onFormSubmitted
                         : null,
                   ),
