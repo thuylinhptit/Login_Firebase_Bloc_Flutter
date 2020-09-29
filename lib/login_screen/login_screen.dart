@@ -1,6 +1,6 @@
 import 'file:///F:/Flutter/bloc_login/lib/login_bloc/login_bloc.dart';
-import 'package:bloc_login/login_form.dart';
-import 'package:bloc_login/user_repository.dart';
+import 'file:///F:/Flutter/bloc_login/lib/login_screen/login_form.dart';
+import 'file:///F:/Flutter/bloc_login/lib/user_repository/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 class LoginScreen extends StatefulWidget {

@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:bloc_login/Todo_state.dart';
+import 'file:///F:/Flutter/bloc_login/lib/todo/todo_state.dart';
 import 'package:bloc_login/todo.dart';
-import 'package:bloc_login/todo_event.dart';
-import 'package:bloc_login/todo_repository.dart';
+import 'file:///F:/Flutter/bloc_login/lib/todo/todo_event.dart';
+import 'file:///F:/Flutter/bloc_login/lib/todo_repository/todo_repository.dart';
 import 'package:meta/meta.dart';
-
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   final TodoRepository _todosRepository;
@@ -27,9 +26,9 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     } else if (event is DeleteTodo) {
       yield* _mapDeleteTodoToState(event);
     } else if (event is DoneAll) {
-      yield* _mapToggleAllToState();
-    } else if (event is ClearAll) {
-      yield* _mapClearCompletedToState();
+      yield* _mapDoneAllToState();
+    } else if (event is DeleteAll) {
+      yield* _mapDeleteAllToState();
     } else if (event is TodoUpdated) {
       yield* _mapTodosUpdateToState(event);
     }
@@ -54,7 +53,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     _todosRepository.deleteTask(event.deletedTodo);
   }
 
-  Stream<TodoState> _mapToggleAllToState() async* {
+  Stream<TodoState> _mapDoneAllToState() async* {
     final currentState = state;
     if (currentState is TodoLoaded) {
       final allComplete = currentState.todos.every((todo) => todo.isComplete);
@@ -67,7 +66,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     }
   }
 
-  Stream<TodoState> _mapClearCompletedToState() async* {
+  Stream<TodoState> _mapDeleteAllToState() async* {
     final currentState = state;
     if (currentState is TodoLoaded) {
       final List<Todo> completedTodos =

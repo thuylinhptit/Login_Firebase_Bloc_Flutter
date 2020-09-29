@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_login/authentication/authentication_event.dart';
-import 'package:bloc_login/authentication_state_todo.dart';
-import 'package:bloc_login/user_repository_todo.dart';
+import 'file:///F:/Flutter/bloc_login/lib/authentication_todo/authentication_state_todo.dart';
+import 'file:///F:/Flutter/bloc_login/lib/user_repository/user_repository_todo.dart';
 import 'package:flutter/cupertino.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationStates>{

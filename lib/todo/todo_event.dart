@@ -36,7 +36,7 @@ class DeleteTodo extends TodoEvent{
   List<Object> get props => [deletedTodo];
 }
 
-class ClearAll extends TodoEvent{
+class DeleteAll extends TodoEvent{
 
 }
 

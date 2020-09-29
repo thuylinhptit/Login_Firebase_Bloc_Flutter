@@ -1,9 +1,9 @@
 
-import 'package:bloc_login/Todo_state.dart';
+import 'file:///F:/Flutter/bloc_login/lib/todo/todo_state.dart';
 import 'package:bloc_login/add_edit_task.dart';
 import 'package:bloc_login/todo.dart';
-import 'package:bloc_login/todo_bloc.dart';
-import 'package:bloc_login/todo_event.dart';
+import 'file:///F:/Flutter/bloc_login/lib/todo/todo_bloc.dart';
+import 'file:///F:/Flutter/bloc_login/lib/todo/todo_event.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,10 +12,10 @@ import 'package:provider/provider.dart';
 import 'task.dart';
 
 
-class ItemTask extends StatelessWidget{
+class ItemTodo extends StatelessWidget{
   final Todo todo;
   int index;
-  ItemTask({@required this.todo,@required this.index});
+  ItemTodo({@required this.todo,@required this.index});
 
   @override
   Widget build(BuildContext context) {

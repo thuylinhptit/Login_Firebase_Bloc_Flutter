@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'file:///F:/Flutter/bloc_login/lib/register_bloc/register_event.dart';
 import 'file:///F:/Flutter/bloc_login/lib/register_bloc/register_state.dart';
-import 'package:bloc_login/user_repository.dart';
+import 'file:///F:/Flutter/bloc_login/lib/user_repository/user_repository.dart';
 import 'package:bloc_login/validator.dart';
 import 'package:meta/meta.dart';
 

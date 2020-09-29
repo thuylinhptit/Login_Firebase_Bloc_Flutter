@@ -1,5 +1,5 @@
-import 'package:bloc_login/register_screen.dart';
-import 'package:bloc_login/user_repository.dart';
+import 'file:///F:/Flutter/bloc_login/lib/register_screen/register_screen.dart';
+import 'file:///F:/Flutter/bloc_login/lib/user_repository/user_repository.dart';
 import 'package:flutter/material.dart';
 
 class CreateAccountButton extends StatelessWidget {
