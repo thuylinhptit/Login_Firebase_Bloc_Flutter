@@ -1,7 +1,5 @@
 import 'package:bloc_login/task.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
-
 
 class Todo extends Equatable{
   final bool isComplete;
@@ -25,11 +23,16 @@ class Todo extends Equatable{
 
   @override
   String toString() {
-    return 'Todo { complete: $isComplete, note: $title, id: $id }';
+    return 'Todo { complete: $isComplete, title: $title, id: $id }';
   }
   Task toTask() {
     return Task();
   }
+
+  Map<String, dynamic> toDocument() => {
+    "isComplete": isComplete,
+    "title": title,
+  };
 
   static Todo fromTask(Task task) {
     return Todo(

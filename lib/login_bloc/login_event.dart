@@ -1,7 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
-
 abstract class LoginEvent extends Equatable {
   @override
   List<Object> get props => [];
@@ -16,8 +15,6 @@ class EmailChanged extends LoginEvent {
   @override
   List<Object> get props => [email];
 
-  @override
-  String toString() => 'EmailChanged { email :$email }';
 }
 
 class PasswordChanged extends LoginEvent {
@@ -28,9 +25,6 @@ class PasswordChanged extends LoginEvent {
 
   @override
   List<Object> get props => [password];
-
-  @override
-  String toString() => 'PasswordChanged { password: $password }';
 }
 
 class Submitted extends LoginEvent {
@@ -42,10 +36,6 @@ class Submitted extends LoginEvent {
   @override
   List<Object> get props => [email, password];
 
-  @override
-  String toString() {
-    return 'Submitted { email: $email, password: $password }';
-  }
 }
 
 class LoginWithGooglePressed extends LoginEvent {
@@ -64,8 +54,4 @@ class LoginWithCredentialsPressed extends LoginEvent {
   @override
   List<Object> get props => [email,password];
 
-  @override
-  String toString() {
-    return 'LoginWithCredentialsPressed { email: $email, password: $password }';
-  }
 }

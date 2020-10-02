@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'file:///F:/Flutter/bloc_login/lib/login_bloc/login_event.dart';
-import 'file:///F:/Flutter/bloc_login/lib/login_bloc/login_state.dart';
-import 'file:///F:/Flutter/bloc_login/lib/user_repository/user_repository.dart';
+import 'package:bloc_login/login_bloc/login_event.dart';
+import 'package:bloc_login/login_bloc/login_state.dart';
+import 'package:bloc_login/user_repository/user_repository.dart';
 import 'package:bloc_login/validator.dart';
 
 

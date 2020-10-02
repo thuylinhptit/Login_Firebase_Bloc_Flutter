@@ -1,10 +1,17 @@
-import 'package:bloc_login/task.dart';
 import 'package:bloc_login/todo.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class TodoEvent extends Equatable {
   @override
   List<Object> get props => [];
+}
+
+class ReloadTodo extends TodoEvent {
+  final List<Todo> todos;
+  ReloadTodo(this.todos);
+
+  @override
+  List<Object> get props => [todos];
 }
 
 class LoadTodo extends TodoEvent{
@@ -27,6 +34,10 @@ class UpdateTodo extends TodoEvent{
   UpdateTodo(this.updatedTodo);
   @override
   List<Object> get props => [updatedTodo];
+  @override
+  String toString() {
+    return "UpdateTodo";
+  }
 }
 
 class DeleteTodo extends TodoEvent{

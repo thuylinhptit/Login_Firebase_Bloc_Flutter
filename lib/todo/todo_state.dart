@@ -1,19 +1,17 @@
-
 import 'package:bloc_login/todo.dart';
 import 'package:equatable/equatable.dart';
 
- class TodoState extends Equatable {
-  List<Todo> todos;
-
+abstract class TodoState extends Equatable {
   @override
-  List<Object> get props => [todos];
+  List<Object> get props => [];
 }
 
 class TodoLoading extends TodoState {}
 
 class TodoLoaded extends TodoState {
-   List<Todo> todos;
-  TodoLoaded([this.todos = const []]);
+  final List<Todo> todos;
+
+  TodoLoaded({this.todos});
 
   @override
   List<Object> get props => [todos];
@@ -23,4 +21,3 @@ class TodoLoaded extends TodoState {
 }
 
 class TodoNotLoaded extends TodoState {}
-

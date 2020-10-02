@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'file:///F:/Flutter/bloc_login/lib/todo/todo_state.dart';
 import 'package:bloc_login/todo.dart';
-import 'file:///F:/Flutter/bloc_login/lib/todo/todo_event.dart';
-import 'file:///F:/Flutter/bloc_login/lib/todo_repository/todo_repository.dart';
-import 'package:meta/meta.dart';
+import 'package:bloc_login/todo/todo_event.dart';
+import 'package:bloc_login/todo/todo_state.dart';
+import 'package:bloc_login/todo_repository/todo_repository.dart';
+import 'package:flutter/foundation.dart';
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   final TodoRepository _todosRepository;
@@ -13,10 +13,17 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   TodoBloc({@required TodoRepository todosRepository})
       : assert(todosRepository != null),
         _todosRepository = todosRepository,
-        super(TodoLoading());
+        super(TodoLoading()){
+
+    _todosRepository.todos().listen((todos) {
+        this.add(ReloadTodo(todos));
+    });
+
+  }
 
   @override
   Stream<TodoState> mapEventToState(TodoEvent event) async* {
+    final currentState = state;
     if (event is LoadTodo) {
       yield* _mapLoadTodosToState();
     } else if (event is AddTodo) {
@@ -31,6 +38,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       yield* _mapDeleteAllToState();
     } else if (event is TodoUpdated) {
       yield* _mapTodosUpdateToState(event);
+    } else if(event is ReloadTodo) {
+      yield TodoLoaded(todos:event.todos);
     }
   }
 
@@ -69,16 +78,16 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   Stream<TodoState> _mapDeleteAllToState() async* {
     final currentState = state;
     if (currentState is TodoLoaded) {
-      final List<Todo> completedTodos =
+      final List<Todo> completedTodo =
       currentState.todos.where((todo) => todo.isComplete).toList();
-      completedTodos.forEach((completedTodo) {
+      completedTodo.forEach((completedTodo) {
         _todosRepository.deleteTask(completedTodo);
       });
     }
   }
 
   Stream<TodoState> _mapTodosUpdateToState(TodoUpdated event) async* {
-    yield TodoLoaded(event.todos);
+    yield TodoLoaded(todos: event.todos);
   }
 
   @override

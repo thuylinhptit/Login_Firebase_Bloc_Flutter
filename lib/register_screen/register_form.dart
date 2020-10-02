@@ -1,9 +1,9 @@
-import 'file:///F:/Flutter/bloc_login/lib/authentication/authentication_bloc.dart';
-import 'file:///F:/Flutter/bloc_login/lib/authentication/authentication_event.dart';
-import 'file:///F:/Flutter/bloc_login/lib/register_bloc/register_bloc.dart';
-import 'file:///F:/Flutter/bloc_login/lib/register_active/register_button.dart';
-import 'file:///F:/Flutter/bloc_login/lib/register_bloc/register_event.dart';
-import 'file:///F:/Flutter/bloc_login/lib/register_bloc/register_state.dart';
+import 'package:bloc_login/authentication/authentication_bloc.dart';
+import 'package:bloc_login/authentication/authentication_event.dart';
+import 'package:bloc_login/register_active/register_button.dart';
+import 'package:bloc_login/register_bloc/register_bloc.dart';
+import 'package:bloc_login/register_bloc/register_event.dart';
+import 'package:bloc_login/register_bloc/register_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -52,8 +52,9 @@ class _RegisterFormState extends State<RegisterForm> {
             );
         }
         if (state.isSuccess) {
-          BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
           Navigator.of(context).pop();
+          BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
+
         }
         if (state.isFailure) {
           Scaffold.of(context)

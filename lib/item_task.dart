@@ -1,16 +1,11 @@
-
-import 'file:///F:/Flutter/bloc_login/lib/todo/todo_state.dart';
 import 'package:bloc_login/add_edit_task.dart';
 import 'package:bloc_login/todo.dart';
-import 'file:///F:/Flutter/bloc_login/lib/todo/todo_bloc.dart';
-import 'file:///F:/Flutter/bloc_login/lib/todo/todo_event.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:bloc_login/todo/todo_bloc.dart';
+import 'package:bloc_login/todo/todo_event.dart';
+import 'package:bloc_login/todo/todo_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:provider/provider.dart';
-import 'task.dart';
-
 
 class ItemTodo extends StatelessWidget{
   final Todo todo;
@@ -77,13 +72,13 @@ class ItemTodo extends StatelessWidget{
             actions: [
               FlatButton(
                 child: Text('Cancel'),
-                onPressed: () => Navigator.of(context).pop(false),
+                onPressed: () => Navigator.of(context).pop(),
               ),
               FlatButton(
                   child: Text('Delete'),
                   onPressed: () {
                     BlocProvider.of<TodoBloc>(context).add(DeleteTodo(todo));
-                    Navigator.pop(context, todo);
+                    Navigator.of(context).pop();
                   }
               )
             ],

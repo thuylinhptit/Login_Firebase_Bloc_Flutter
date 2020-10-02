@@ -1,11 +1,9 @@
 import 'package:bloc_login/todo.dart';
-import 'file:///F:/Flutter/bloc_login/lib/todo/todo_bloc.dart';
-import 'file:///F:/Flutter/bloc_login/lib/todo/todo_event.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:bloc_login/todo/todo_bloc.dart';
+import 'package:bloc_login/todo/todo_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'task.dart';
 
 class AddTask extends StatefulWidget {
   final Todo todo;
@@ -19,13 +17,11 @@ class AddTask extends StatefulWidget {
 
 class _AddTask extends State<AddTask> {
   final taskTextController = TextEditingController();
-   TodoBloc todoBloc ;
   bool statusDone = false;
 
   @override
   void initState() {
     super.initState();
-    todoBloc = BlocProvider.of<TodoBloc>(context);
     if (widget.todo != null) {
       taskTextController.text = widget.todo.title;
     }
@@ -33,7 +29,6 @@ class _AddTask extends State<AddTask> {
 
   @override
   void dispose() {
-    todoBloc.close();
     taskTextController.dispose();
     super.dispose();
   }
@@ -82,15 +77,15 @@ class _AddTask extends State<AddTask> {
   Future<void> onSubmit() async {
     final String tasktext = taskTextController.text;
     final bool isComplete = statusDone;
-
+    // ignore: close_sinks
+    final taskProvider = BlocProvider.of<TodoBloc>(context);
     // Edit
     if (widget.todo != null && widget.index != null) {
       Todo todo = Todo(
           title: taskTextController.text,
           isComplete: widget.todo.isComplete,
           id: widget.todo.id);
-      Navigator.pop(context);
-      todoBloc.add(AddTodo(todo));
+      taskProvider.add(UpdateTodo(todo));
       Navigator.pop(context);
       print('Edit done');
       return;
@@ -100,12 +95,9 @@ class _AddTask extends State<AddTask> {
       Todo todo = Todo(
         isComplete: isComplete,
         title: tasktext,
-       // id: widget.todo.id
       );
+      taskProvider.add(AddTodo(todo));
       print("${tasktext.toString()}");
-      todoBloc.add(AddTodo(
-       todo
-      ));
       Navigator.pop(context);
       print('Done Add');
     }

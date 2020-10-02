@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-abstract class AuthenticationEvent extends Equatable{
+abstract class AuthenticationTodoEvent extends Equatable{
   @override
   List<Object> get props => [];
 
 }
 
-class StartApp extends AuthenticationEvent{
+class StartApp extends AuthenticationTodoEvent{
   @override
   String toString() {
     return "Start App ";

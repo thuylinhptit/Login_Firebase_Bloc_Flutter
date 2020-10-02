@@ -1,10 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-@immutable
 abstract class RegisterEvent extends Equatable {
   @override
-  // TODO: implement props
   List<Object> get props => [];
 }
 
@@ -13,9 +11,6 @@ class EmailChanged extends RegisterEvent {
   EmailChanged({@required this.email});
   @override
   List<Object> get props => [email];
-
-  @override
-  String toString() => 'EmailChanged { email :$email }';
 }
 
 class PasswordChanged extends RegisterEvent {
@@ -24,8 +19,6 @@ class PasswordChanged extends RegisterEvent {
   @override
   List<Object> get props => [password];
 
-  @override
-  String toString() => 'PasswordChanged { password: $password }';
 }
 
 class Submitted extends RegisterEvent {
@@ -34,8 +27,5 @@ class Submitted extends RegisterEvent {
   Submitted({@required this.email, @required this.password});
   @override
   List<Object> get props => [email, password];
-  @override
-  String toString() {
-    return 'Submitted { email: $email, password: $password }';
-  }
+
 }

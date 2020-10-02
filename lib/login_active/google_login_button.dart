@@ -1,5 +1,6 @@
-import 'file:///F:/Flutter/bloc_login/lib/login_bloc/login_bloc.dart';
-import 'file:///F:/Flutter/bloc_login/lib/login_bloc/login_event.dart';
+
+import 'package:bloc_login/login_bloc/login_bloc.dart';
+import 'package:bloc_login/login_bloc/login_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

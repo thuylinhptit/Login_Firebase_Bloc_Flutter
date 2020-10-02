@@ -1,4 +1,6 @@
+
 import 'package:bloc_login/home_screen.dart';
+import 'package:bloc_login/stats.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +14,7 @@ class _BottomNavigation extends State<BottomNavigation>{
   var _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[
     Center(
-      child: HomeScreen(),
+      child: HomeScreen( ),
     ),
     Center(
       child: Scaffold(
@@ -22,14 +24,7 @@ class _BottomNavigation extends State<BottomNavigation>{
           ),
           centerTitle: true,
         ),
-        body: Center(
-          child: Column(
-            children: [
-              Text("Completed", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
-              Text("Incompleted", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),)
-            ],
-          ),
-        ),
+        body: Stats(),
       ),
     )
   ];

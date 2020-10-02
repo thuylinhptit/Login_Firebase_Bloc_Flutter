@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'file:///F:/Flutter/bloc_login/lib/stats/stats_event.dart';
-import 'file:///F:/Flutter/bloc_login/lib/stats/stats_state.dart';
+import 'package:bloc_login/stats/stats_event.dart';
+import 'package:bloc_login/stats/stats_state.dart';
 import 'package:bloc_login/todo/todo_bloc.dart';
 import 'package:bloc_login/todo/todo_state.dart';
 
@@ -11,9 +11,9 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
   StatsBloc({TodoBloc todosBloc})
       : assert(todosBloc != null),
         super(StatsLoading()) {
-    _todosSubscription = todosBloc.listen((state) {
+    _todosSubscription = todosBloc.listen(( state) {
       if (state is TodoLoaded) {
-        add(UpdateStats(state.todos));
+        add(UpdateStats((state as TodoLoaded).todos));
       }
     });
   }
