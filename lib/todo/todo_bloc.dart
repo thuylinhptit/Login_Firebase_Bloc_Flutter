@@ -23,7 +23,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
   @override
   Stream<TodoState> mapEventToState(TodoEvent event) async* {
-    final currentState = state;
+
     if (event is LoadTodo) {
       yield* _mapLoadTodosToState();
     } else if (event is AddTodo) {

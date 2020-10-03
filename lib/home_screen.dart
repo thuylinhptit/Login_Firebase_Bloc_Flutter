@@ -1,10 +1,12 @@
 import 'package:bloc_login/add_edit_task.dart';
+import 'package:bloc_login/filter/filter_bloc.dart';
+import 'package:bloc_login/filter/filter_state.dart';
+import 'package:bloc_login/filter_button.dart';
 import 'package:bloc_login/item_task.dart';
 import 'package:bloc_login/loading.dart';
 import 'package:bloc_login/login_screen/login_screen.dart';
-import 'package:bloc_login/popupmenu/choice.dart';
-import 'package:bloc_login/popupmenu/click_all.dart';
 import 'package:bloc_login/popupmenu_clickall.dart';
+import 'package:bloc_login/tab_bloc.dart';
 import 'package:bloc_login/todo/todo_bloc.dart';
 import 'package:bloc_login/todo/todo_state.dart';
 import 'package:bloc_login/user_repository/user_repository.dart';
@@ -19,7 +21,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserRepository _userRepository;
+    UserRepository _userRepository = RepositoryProvider.of(context);
     return BlocBuilder<TodoBloc, TodoState>(
       builder: (context, active) => Stack(children: [
         Scaffold(
@@ -32,57 +34,42 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.white),
             ),
             actions: <Widget>[
-              // BlocBuilder(
-              //   builder: (context, active){
-              //     return PopupMenuButton(
-              //       onSelected: (Choice choice){
-              //         _select(choice, context);
-              //       },
-              //       icon: Icon(Icons.menu),
-              //       itemBuilder: (BuildContext context) {
-              //         return choice.map((Choice choice) {
-              //           var color = Colors.black87;
-              //           if( choice.index == 1 && status == TodoStatus.allTodo
-              //               || choice.index == 2 && status == TodoStatus.notCompleted
-              //               || choice.index == 3 && status == TodoStatus.completed
-              //           ) {
-              //             color= Colors.blue;
-              //           }
-              //           return PopupMenuItem<Choice>(
-              //               value: choice,
-              //               child: Text(choice.title, style: TextStyle( color:  color), ));
-              //         }).toList();
-              //       },
-              //     );
-              //   },
-              // ),
-              // PopupMenuButton(
-              //   onSelected: (ClickAll clickAll ){
-              //     _selectClickAll(clickAll, context);
-              //   },
-              //   icon: Icon(Icons.more_vert),
-              //   itemBuilder: (BuildContext context) {
-              //     return listClickAll.map((ClickAll clickAll) {
-              //       return PopupMenuItem<ClickAll>(
-              //         value: clickAll,
-              //         child: Text(clickAll.title),
-              //       );
-              //     }).toList();
-              //   },
-               //),
+              // ignore: unrelated_type_equality_checks
+              FilterButton(),
               PopupMenuClickAll(),
               IconButton(
                 icon: Icon(Icons.exit_to_app),
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute( builder: (context) => LoginScreen(userRepository: _userRepository ,)));
-
                 }
 
               )
 
             ],
           ),
+          // body: BlocBuilder<FilterBloc,FilterState>(
+          //   builder:(context, state){
+          //     if( state is FilterLoading){
+          //       return Loading();
+          //     }
+          //     else if( state is FilterLoaded ){
+          //       final todos = state.filter;
+          //       return ListView.builder(
+          //           itemCount: todos.length,
+          //           itemBuilder: (context, index ){
+          //             final todo = todos[index];
+          //             return ItemTodo(
+          //                todo: todo,
+          //                 index: index,
+          //             );
+          //           });
+          //      }
+          //     else{
+          //       return Container();
+          //     }
+          //   },
+          // ),
           body: BlocBuilder<TodoBloc, TodoState>(
               builder: (context, state){
                 if( state is TodoLoading ){
@@ -90,6 +77,7 @@ class HomeScreen extends StatelessWidget {
                 }
                 else if( state is TodoLoaded){
                   final todos = state.todos;
+
                   return ListView.builder(
                       itemCount: todos.length ,
                       itemBuilder: (context, index){
@@ -118,15 +106,4 @@ class HomeScreen extends StatelessWidget {
   }
 }
 //
-void _select ( Choice choice , BuildContext context ){
 
-}
-
-void _selectClickAll(ClickAll clickAll, BuildContext context) {
-  var todoBlocProvider = BlocProvider.of(context);
-  if (clickAll.index == 1) {
-    //todoBlocProvider.DoneAll
-  } else {
-    //
-  }
-}

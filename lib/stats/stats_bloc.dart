@@ -11,9 +11,13 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
   StatsBloc({TodoBloc todosBloc})
       : assert(todosBloc != null),
         super(StatsLoading()) {
+    var todoState = todosBloc.state;
+    if (todoState is TodoLoaded) {
+      add(UpdateStats((todoState).todos));
+    }
     _todosSubscription = todosBloc.listen(( state) {
       if (state is TodoLoaded) {
-        add(UpdateStats((state as TodoLoaded).todos));
+        add(UpdateStats((state).todos));
       }
     });
   }

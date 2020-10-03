@@ -3,10 +3,13 @@ import 'package:bloc_login/authentication/authentication_bloc.dart';
 import 'package:bloc_login/authentication/authentication_event.dart';
 import 'package:bloc_login/authentication/authentication_state.dart';
 import 'package:bloc_login/bottomnavigation.dart';
+import 'package:bloc_login/filter/filter_bloc.dart';
 import 'package:bloc_login/home_screen.dart';
 import 'package:bloc_login/login_screen/login_screen.dart';
 import 'package:bloc_login/login_screen/screen.dart';
 import 'package:bloc_login/simple_bloc_observer.dart';
+import 'package:bloc_login/stats/stats_bloc.dart';
+import 'package:bloc_login/tab_bloc.dart';
 import 'package:bloc_login/todo/todo_bloc.dart';
 import 'package:bloc_login/todo_repository/todo_firebase_repository.dart';
 import 'package:bloc_login/todo_repository/todo_repository.dart';
@@ -20,17 +23,24 @@ Future<void> main () async {
   await Firebase.initializeApp();
   Bloc.observer = SimpleBlocObserver();
   final UserRepository userRepository = UserRepository();
-  final TodoRepository todoRepository = FirebaseRepository() as TodoRepository;
+  final TodoRepository todoRepository = FirebaseRepository();
   runApp(
-    MultiBlocProvider(providers: [
-      BlocProvider(
-        create: (context) => AuthenticationBloc(userRepository:  userRepository)
-          ..add(AppStarted()),
-      ),
-      BlocProvider(
-        create: (context) => TodoBloc(todosRepository: todoRepository),
-      )
-    ], child:  App(userRepository: userRepository),),
+    MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+          create: (context) => userRepository,
+        )
+      ],
+      child: MultiBlocProvider(providers: [
+        BlocProvider(
+          create: (context) => AuthenticationBloc(userRepository:  userRepository)
+            ..add(AppStarted()),
+        ),
+        BlocProvider(
+          create: (context) => TodoBloc(todosRepository: todoRepository),
+        )
+      ], child:  App(userRepository: userRepository),),
+    ),
 
   );
 }
@@ -51,7 +61,22 @@ class App extends StatelessWidget{
               return Screen();
             }
             if( state is Authenticated){
-              return BottomNavigation();
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider<FilterBloc>(
+                    create: (context) => FilterBloc(
+                      BlocProvider.of<TodoBloc>(context)
+                    ),
+                  ),
+                  BlocProvider<StatsBloc>(
+                    create: (context) => StatsBloc(
+                      todosBloc: BlocProvider.of<TodoBloc>(context),
+                    ),
+                  ),
+                ],
+                child: BottomNavigation(),
+              );
+
             }
             if( state is Unauthenticated){
               return LoginScreen(userRepository:  _userRepository ,);
