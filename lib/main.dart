@@ -1,15 +1,11 @@
-
 import 'package:bloc_login/authentication/authentication_bloc.dart';
 import 'package:bloc_login/authentication/authentication_event.dart';
 import 'package:bloc_login/authentication/authentication_state.dart';
 import 'package:bloc_login/bottomnavigation.dart';
-import 'package:bloc_login/filter/filter_bloc.dart';
-import 'package:bloc_login/home_screen.dart';
 import 'package:bloc_login/login_screen/login_screen.dart';
 import 'package:bloc_login/login_screen/screen.dart';
 import 'package:bloc_login/simple_bloc_observer.dart';
 import 'package:bloc_login/stats/stats_bloc.dart';
-import 'package:bloc_login/tab_bloc.dart';
 import 'package:bloc_login/todo/todo_bloc.dart';
 import 'package:bloc_login/todo_repository/todo_firebase_repository.dart';
 import 'package:bloc_login/todo_repository/todo_repository.dart';
@@ -38,7 +34,7 @@ Future<void> main () async {
         ),
         BlocProvider(
           create: (context) => TodoBloc(todosRepository: todoRepository),
-        )
+        ),
       ], child:  App(userRepository: userRepository),),
     ),
 
@@ -63,11 +59,6 @@ class App extends StatelessWidget{
             if( state is Authenticated){
               return MultiBlocProvider(
                 providers: [
-                  BlocProvider<FilterBloc>(
-                    create: (context) => FilterBloc(
-                      BlocProvider.of<TodoBloc>(context)
-                    ),
-                  ),
                   BlocProvider<StatsBloc>(
                     create: (context) => StatsBloc(
                       todosBloc: BlocProvider.of<TodoBloc>(context),

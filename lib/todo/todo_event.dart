@@ -1,4 +1,5 @@
 import 'package:bloc_login/todo.dart';
+import 'package:bloc_login/todo/todo_state.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class TodoEvent extends Equatable {
@@ -61,3 +62,11 @@ class TodoUpdated extends TodoEvent{
   @override
   List<Object> get props => [todos];
 }
+
+class UpdateFilter extends TodoEvent{
+  final TodoFilter filter;
+  UpdateFilter(this.filter);
+  @override
+  List<Object> get props => [filter];
+}
+

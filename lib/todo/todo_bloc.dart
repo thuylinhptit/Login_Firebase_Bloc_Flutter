@@ -23,7 +23,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
   @override
   Stream<TodoState> mapEventToState(TodoEvent event) async* {
-
+    final currentState = state;
     if (event is LoadTodo) {
       yield* _mapLoadTodosToState();
     } else if (event is AddTodo) {
@@ -39,8 +39,27 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     } else if (event is TodoUpdated) {
       yield* _mapTodosUpdateToState(event);
     } else if(event is ReloadTodo) {
-      yield TodoLoaded(todos:event.todos);
+      yield TodoLoaded(todos:event.todos, filterd: event.todos, );
+    } else if( event is UpdateFilter && currentState is TodoLoaded) {
+      yield _mapUpdateFilterToState(currentState,  event);
     }
+  }
+
+  TodoState _mapUpdateFilterToState(TodoLoaded currentState,  UpdateFilter event)  {
+    return TodoLoaded(todos :currentState.todos,
+        filterd:  _mapTodosToFilterTodo(currentState.todos, event.filter,), status: event.filter);
+
+  }
+  List<Todo> _mapTodosToFilterTodo(List<Todo> todos, TodoFilter filter){
+    return todos.where((element) {
+      if( filter == TodoFilter.all ){
+        return true;
+      }
+      else if( filter == TodoFilter.completed ){
+        return element.isComplete;
+      }
+      return !element.isComplete;
+    }).toList();
   }
 
   Stream<TodoState> _mapLoadTodosToState() async* {

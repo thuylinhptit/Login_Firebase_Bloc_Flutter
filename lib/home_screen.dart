@@ -1,12 +1,9 @@
 import 'package:bloc_login/add_edit_task.dart';
-import 'package:bloc_login/filter/filter_bloc.dart';
-import 'package:bloc_login/filter/filter_state.dart';
-import 'package:bloc_login/filter_button.dart';
 import 'package:bloc_login/item_task.dart';
 import 'package:bloc_login/loading.dart';
 import 'package:bloc_login/login_screen/login_screen.dart';
-import 'package:bloc_login/popupmenu_clickall.dart';
-import 'package:bloc_login/tab_bloc.dart';
+import 'package:bloc_login/popupmenu/popupmenu_clickall.dart';
+import 'package:bloc_login/popupmenu/popupmenu_filter.dart';
 import 'package:bloc_login/todo/todo_bloc.dart';
 import 'package:bloc_login/todo/todo_state.dart';
 import 'package:bloc_login/user_repository/user_repository.dart';
@@ -76,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                   return Loading();
                 }
                 else if( state is TodoLoaded){
-                  final todos = state.todos;
+                  final todos = state.filterd;
 
                   return ListView.builder(
                       itemCount: todos.length ,
